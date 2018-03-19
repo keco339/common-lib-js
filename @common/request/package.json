@@ -1,0 +1,14 @@
+{
+  "name": "@common/request",
+  "version": "0.0.1",
+  "description": "Common request",
+  "repository": "https://github.com/keco339/common-lib-js/@common/request",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "qs": "^6.5.1",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}
