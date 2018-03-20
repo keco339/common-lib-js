@@ -28,6 +28,15 @@ exports.getLastResourceUUIDInURL = (url)=>{
     if( !result ) return null;
     return result[0].substr(1);
 };
+exports.uuid2number = (uuid)=>{
+    let number = Array.from(uuid).reduce((ret,char,i)=>{
+        return ret + (char.charCodeAt(0)-"0".charCodeAt(0))*Math.pow(2,(i%19+1));
+    },0);
+    return _.padStart(number,8,'0');
+};
+
+const UUIDReg = new RegExp('[a-z0-9A-Z]{22}');
+exports.checkUUID = (uuid)=>{return UUIDReg.test(uuid)?true:false;};
 
 // Error 错误处理工具集
 exports.isDBError = (error)=>error && error.code && error.errno && _.has(error, 'sql');

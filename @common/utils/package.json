@@ -1,8 +1,8 @@
 {
-  "name": "@common/utils",
+  "name": "common-utils",
   "version": "0.0.1",
   "description": "Common utils",
-  "repository": "https://github.com/keco339/common-lib-js/@common/utils",
+  "repository": "https://github.com/keco339/common-lib-js/tree/developer/@common/utils",
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
