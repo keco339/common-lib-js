@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const uuid = require('uuid');
 const moment = require('moment');
 const _ = require('lodash');
+const errorCodeTable = require('./errorCodeTable');
 
 // UUID操作工具集
 exports.createUUID = ()=>{
@@ -71,4 +72,21 @@ exports.errorReturn = (error)=>{
             stack : ((error&&error.stack) ? error.stack : 'no stack')
         };
     }
+};
+exports.handlerError = (rtx,error)=>{
+    console.error(error);
+    error = exports.isDBError(error);
+    rtx.body =   exports.errorReturn(error);
+    rtx.status = rtx.body.statusCode || 500;
+
+};
+
+exports.Error = (name,status,code,description)=>{
+    let error = new Error();
+    error.name = name || 'Error';
+    error.status = status || 500;
+    error.code = code || 9999;
+    error.message = errorCodeTable.errorCode2Text(error.code);
+    error.description = description || error.message;
+    throw error;
 };

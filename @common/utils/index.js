@@ -14,6 +14,8 @@ exports.checkUUID = utils.checkUUID;
 exports.isDBError = utils.isDBError;
 exports.DBError = utils.DBError;
 exports.errorReturn = utils.errorReturn;
+exports.handlerError = utils.handlerError;
+exports.Error = utils.Error;
 
 
 exports.TimeLogger = TimeLogger;
