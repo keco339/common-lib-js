@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const uuid = require('uuid');
 const moment = require('moment');
 const _ = require('lodash');
+const inflection = require('inflection');
 const errorCodeTable = require('./errorCodeTable');
 
 // UUID操作工具集
@@ -23,6 +24,12 @@ exports.getResourceUUIDInURL = (url,name)=>{
     subStr = subStr.substr(0,result['index']);
     return subStr;
 };
+exports.getResourceTypeInURL = (url)=>{
+    const resourceObjReg = /\/([\w]+)\/[\w]{22}$/;
+    let ret = resourceObjReg.exec(url);
+    if(!ret){ return null;}
+    return inflection.singularize(ret[1]);
+};
 exports.getLastResourceUUIDInURL = (url)=>{
     let reg = /\/[\w]{22}$/;
     let result = reg.exec(url);
@@ -38,6 +45,21 @@ exports.uuid2number = (uuid)=>{
 
 const UUIDReg = new RegExp('[a-z0-9A-Z]{22}');
 exports.checkUUID = (uuid)=>{return UUIDReg.test(uuid)?true:false;};
+exports.checkRequiredParams = (obj, keys)=>{
+    let error = null;
+    let s = keys.some( key =>{
+        if( !_.has(obj,key)){
+            error = new Error();
+            error.name = 'Error'; error.status = 400;
+            error.code = errorCodeTable.missingParam2Code( key );
+            error.message = errorCodeTable.errorCode2Text( error.code );
+            error.description = `Missing param '${key}'`;
+            return true;
+        }
+    });
+    if(error) throw error;
+};
+
 
 // Error 错误处理工具集
 exports.isDBError = (error)=>error && error.code && error.errno && _.has(error, 'sql');
@@ -75,7 +97,7 @@ exports.errorReturn = (error)=>{
 };
 exports.handlerError = (rtx,error)=>{
     console.error(error);
-    error = exports.isDBError(error);
+    error = exports.isDBError(error)?exports.DBError(error):error;
     rtx.body =   exports.errorReturn(error);
     rtx.status = rtx.body.statusCode || 500;
 

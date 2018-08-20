@@ -1,11 +1,12 @@
 {
   "name": "develop-utils",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "develop utils",
   "repository": "https://github.com/keco339/common-lib-js/tree/developer/@common/utils",
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
+    "inflection": "^1.12.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "uuid": "^3.2.1"

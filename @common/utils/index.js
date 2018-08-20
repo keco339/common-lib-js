@@ -7,9 +7,10 @@ const errorCodeTable = require('./lib/errorCodeTable');
 exports.createUUID = utils.createUUID;
 exports.getResourceUUIDInURL = utils.getResourceUUIDInURL;
 exports.getLastResourceUUIDInURL = utils.getLastResourceUUIDInURL;
+exports.getResourceTypeInURL = utils.getResourceTypeInURL;
 exports.uuid2number = utils.uuid2number;
 exports.checkUUID = utils.checkUUID;
-
+exports.checkRequiredParams = utils.checkRequiredParams;
 
 exports.isDBError = utils.isDBError;
 exports.DBError = utils.DBError;
