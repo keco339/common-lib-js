@@ -1,12 +1,13 @@
 {
   "name": "common-request",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Common request",
   "repository": "https://github.com/keco339/common-lib-js/tree/developer/@common/request",
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
     "lodash": "^4.17.4",
+    "promise-retry": "^2.0.1",
     "qs": "^6.5.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
